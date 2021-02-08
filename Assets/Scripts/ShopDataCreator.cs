@@ -14,7 +14,6 @@ public class ShopDataCreator : MonoBehaviour
     public GameObject canvas;
   
     public static ShopDataCreator instance;
-        
 
     public  List<GameObject> shopList;
 
@@ -39,11 +38,11 @@ public class ShopDataCreator : MonoBehaviour
            
         try
         {
-            for (int i = 0; i < SaveData.Items.Count; i++)
+            for (int i = 0; i < userdata_obj.Items.Count; i++)
             {
                 item = Instantiate(prefab, transform);
 
-                item.GetComponent<Items>().Init(i.ToString(), SaveData.Items[i].Field2, SaveData.Items[i].Field4, SaveData.Items[i].Num1, SaveData.Items[i].Num2);
+                item.GetComponent<Items>().Init(i.ToString(), userdata_obj.Items[i].Field2, userdata_obj.Items[i].Field4, userdata_obj.Items[i].Num1, userdata_obj.Items[i].Num2);
             }
         }
         catch (Exception e)

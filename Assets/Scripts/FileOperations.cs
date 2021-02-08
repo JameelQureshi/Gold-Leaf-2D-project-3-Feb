@@ -76,23 +76,27 @@ public class FileOperations : MonoBehaviour
 
         if (saveDataJson != string.Empty)
         {
+            //saveData = JsonUtility.FromJson<SaveData>(saveDataJson);
 
-            saveData = JsonUtility.FromJson<SaveData>(saveDataJson);
+            string cheackString = saveDataJson.Replace("{","");
+            cheackString = cheackString.Replace("}", "");
 
-            print(SaveData.Items[0].ActCode);
-
-
-            //SaveData.Items = JsonUtility.FromJson<SaveData>(saveDataJson);
-
-
+            if (cheackString != string.Empty)
+            {
+                saveData = JsonUtility.FromJson<SaveData>(saveDataJson);
+            }
+            else
+            {
+                saveData = new SaveData();
+                saveData.Items = new List<DatatoSend>();
+            }
         }
         else
         {
-            SaveData.Items = new List<DatatoSend>();
+            saveData = new SaveData();
+            saveData.Items = new List<DatatoSend>();
         }
-
-        SaveData.Items = new List<DatatoSend>();
-
+        
         DatatoSend mydata;
 
             mydata = new DatatoSend();
@@ -110,23 +114,26 @@ public class FileOperations : MonoBehaviour
 
         print(mydata.Field1);
 
-        if (SaveData.Items == null)
+        if (saveData.Items == null)
         {
             print("its null");
         }
-        SaveData.Items.Add(mydata);
+        saveData.Items.Add(mydata);
+
         
         saveDataJson = JsonUtility.ToJson(saveData);
 
-        try
-        {
-            File.WriteAllText(fileName, saveDataJson);
-        }
-        catch (Exception e)
-        {
-            Debug.Log("Exeption: " + e);
-        }
+        Debug.Log("Raw Json: " + saveDataJson);
 
+        // try
+        // {
+        File.WriteAllText(fileName, saveDataJson);
+        // }
+        // catch (Exception e)
+        //{
+        //  Debug.Log("Exeption: " + e);
+        // //}
+        
         PlayerPrefs.SetString("StartAppend", "false");
 
         //LoadGameBtnListener();
@@ -147,7 +154,7 @@ public class FileOperations : MonoBehaviour
         else
         {
             saveData = new SaveData();
-            SaveData.Items = new List<DatatoSend>();
+            saveData.Items = new List<DatatoSend>();
         }
 
 
