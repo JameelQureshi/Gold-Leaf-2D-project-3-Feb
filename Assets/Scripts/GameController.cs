@@ -144,7 +144,7 @@ public class GameController : MonoBehaviour
         VideoPanel.SetActive(true);
         EndTimePanel.SetActive(true);
         Time.timeScale = 1f;
-
+        LosseName.text = "" + PlayerPrefs.GetString("Player_UserName");
         PlayerPrefs.SetString("User_Score", "0");
         PlayerPrefs.SetString("User_Time", "00");
 
